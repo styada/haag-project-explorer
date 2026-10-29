@@ -80,10 +80,10 @@
     display: inline-block; font-family: "Helvetica Neue", sans-serif; font-size: 14.5px; font-weight: 700;
     padding: 13px 26px; border-radius: 24px; text-decoration: none;
   }
-  .btn-gold { background: var(--gold); color: var(--navy); }
-  .btn-gold:hover { background: var(--gold-mid); }
-  .btn-outline { border: 1.5px solid var(--gold); color: #fff; }
-  .btn-outline:hover { background: rgba(179,163,105,0.1); }
+  .btn-gold { background: var(--gold); color: var(--navy); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  .btn-gold:hover { background: var(--gold-mid); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.22); }
+  .btn-outline { border: 1.5px solid var(--gold); color: #fff; transition: transform 0.12s ease, background 0.12s ease; }
+  .btn-outline:hover { background: rgba(179,163,105,0.12); transform: translateY(-1px); }
 
   /* ---------- Stat row (reused verbatim pattern from team-matching.html) ---------- */
   .stat-wrap { max-width: 1080px; margin: -56px auto 0; padding: 0 24px; position: relative; z-index: 2; }
@@ -114,7 +114,9 @@
   .mission-card {
     background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px 20px;
     border-top: 3px solid var(--gold);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+  .mission-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,48,87,0.1); }
   .mission-card .idx {
     width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--gold);
     display: flex; align-items: center; justify-content: center;
@@ -127,7 +129,8 @@
   /* ---------- Programs grid ---------- */
   .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   @media (max-width: 900px) { .programs-grid { grid-template-columns: 1fr; } }
-  .program-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; border-left: 4px solid var(--gold); }
+  .program-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; border-left: 4px solid var(--gold); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .program-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,48,87,0.1); }
   .program-card .eyebrow2 {
     font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--mute); font-weight: 600; margin-bottom: 10px; display: block;

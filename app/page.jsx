@@ -18,12 +18,13 @@ export default function HomePage() {
           <div className="eyebrow">Human-Augmented Analytics Group</div>
           <h1>Advancing interdisciplinary data science through human-AI partnership</h1>
           <p className="sub">
-            An experimental virtual laboratory connecting researchers and domain experts to
-            democratize AI implementation across disciplines.
+            A selective, virtual laboratory connecting researchers and domain experts to
+            democratize AI implementation across disciplines. Earn credit, work with faculty,
+            and ship research you can put your name on.
           </p>
           <div className="hero-ctas">
             <a className="btn btn-gold" href="/recruitment">Become a Researcher →</a>
-            <a className="btn btn-outline" href="#mission">Explore Our Mission</a>
+            <a className="btn btn-outline" href="/project-explorer">Browse Open Projects</a>
           </div>
         </div>
       </div>

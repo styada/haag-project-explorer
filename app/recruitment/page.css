@@ -328,7 +328,184 @@
   }
   .loading { color: var(--mute); font-size: 14px; }
 
-  .gt-footer { background: var(--navy); color: #C7D3DB; margin-top: 40px; }
+  /* ---------- Recruiting hero ---------- */
+  .recruit-hero {
+    background: linear-gradient(115deg, #001A30 0%, #003057 45%, #0C4A7A 100%);
+    padding: 84px 24px 110px;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .recruit-hero::after {
+    content: ""; position: absolute; right: -90px; top: -90px;
+    width: 380px; height: 380px; border: 2px solid rgba(179,163,105,0.2); border-radius: 50%;
+  }
+  .recruit-hero::before {
+    content: ""; position: absolute; left: -70px; bottom: -120px;
+    width: 300px; height: 300px; border: 2px solid rgba(179,163,105,0.12); border-radius: 50%;
+  }
+  .recruit-hero-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+  .recruit-hero .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.16em;
+    color: var(--gold); text-transform: uppercase; font-weight: 600; margin-bottom: 16px;
+  }
+  .recruit-hero h1 {
+    font-family: "Archivo", sans-serif; font-weight: 800; font-size: 44px; line-height: 1.14;
+    color: #fff; margin: 0 0 18px; letter-spacing: -0.01em;
+  }
+  .recruit-hero .hero-accent {
+    display: block; margin-top: 10px;
+    background: linear-gradient(90deg, #D9C87F, #B3A369 60%, #F0E4B2);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: var(--gold);
+    font-size: 30px; letter-spacing: 0;
+  }
+  .recruit-hero .sub {
+    color: #C7D6E0; font-size: 16px; line-height: 1.65; max-width: 620px; margin: 0 auto 26px;
+  }
+  .phase-chip-wrap {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(179,163,105,0.35);
+    border-radius: 999px; padding: 8px 18px; margin-bottom: 26px;
+  }
+  .phase-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+    box-shadow: 0 0 0 0 rgba(179,163,105,0.5); animation: pulseDot 2.2s infinite;
+  }
+  @keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(179,163,105,0.55); }
+    70% { box-shadow: 0 0 0 7px rgba(179,163,105,0); }
+    100% { box-shadow: 0 0 0 0 rgba(179,163,105,0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .phase-chip-dot { animation: none; } }
+  .phase-chip-label {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #A9C0D1; font-weight: 600;
+  }
+  .phase-chip-value { color: #fff; font-size: 13px; font-weight: 700; }
+  .recruit-hero .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .recruit-hero .btn {
+    display: inline-block; font-size: 14.5px; font-weight: 700; padding: 13px 26px;
+    border-radius: 24px; text-decoration: none; transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .recruit-hero .btn-gold { background: var(--gold); color: var(--navy); }
+  .recruit-hero .btn-gold:hover { background: var(--gold-mid); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.25); }
+  .recruit-hero .btn-outline { border: 1.5px solid var(--gold); color: #fff; }
+  .recruit-hero .btn-outline:hover { background: rgba(179,163,105,0.12); transform: translateY(-1px); }
+
+  /* ---------- Social proof ---------- */
+  .stat-wrap { max-width: 1080px; margin: -62px auto 0; padding: 0 24px; position: relative; z-index: 2; }
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 760px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 20px 20px 18px;
+    border-top: 3px solid var(--gold); box-shadow: 0 6px 20px rgba(0,48,87,0.06);
+  }
+  .stat-card .num { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 30px; color: var(--navy); }
+  .stat-card .lbl { font-size: 11px; color: var(--mute); margin: 3px 0 10px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600;
+    padding: 3px 10px; border-radius: 10px; background: #F2EFE7; color: var(--gold-dark);
+  }
+
+  /* ---------- Shared section shell ---------- */
+  .section { max-width: 1080px; margin: 0 auto; padding: 74px 24px 0; }
+  #status { scroll-margin-top: 24px; padding-bottom: 74px; }
+  #how-it-works { scroll-margin-top: 24px; }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+  .section .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.16em;
+    color: var(--gold-dark); text-transform: uppercase; font-weight: 600; margin-bottom: 12px;
+  }
+  .section h2 { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 28px; color: var(--navy); margin: 0; }
+
+  /* ---------- Why join / benefits ---------- */
+  .benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .benefit-grid { grid-template-columns: repeat(2, 1fr); } }
+  .benefit-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 24px 20px;
+    border-top: 3px solid var(--gold);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .benefit-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,48,87,0.1); }
+  .benefit-icon {
+    width: 38px; height: 38px; border-radius: 10px; margin-bottom: 14px;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .benefit-card h3 { font-family: "Archivo", sans-serif; font-weight: 700; font-size: 15.5px; color: var(--navy); margin: 0 0 8px; }
+  .benefit-card p { font-size: 12.75px; color: var(--mute); line-height: 1.6; margin: 0; }
+
+  /* ---------- How it works ---------- */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .steps-grid { grid-template-columns: 1fr; } }
+  .step-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 24px 22px;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .step-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,48,87,0.1); }
+  .step-idx {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700; color: var(--gold-dark);
+    width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-kicker {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 6px;
+  }
+  .step-card h3 { font-family: "Archivo", sans-serif; font-weight: 700; font-size: 16px; color: var(--navy); margin: 0 0 8px; }
+  .step-card p { font-size: 12.75px; color: var(--mute); line-height: 1.6; margin: 0 0 12px; }
+  .cta-link {
+    display: inline-block; font-size: 12px; font-weight: 700; color: var(--navy);
+    text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 1px;
+  }
+  .cta-link:hover { color: var(--navy-light); }
+
+  /* ---------- Researcher voices ---------- */
+  .voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .voice-grid { grid-template-columns: 1fr; } }
+  .voice-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px;
+    margin: 0; padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 16px;
+    border-left: 4px solid var(--gold);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .voice-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,48,87,0.1); }
+  .voice-card blockquote {
+    margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--ink); flex: 1;
+  }
+  .voice-card figcaption { border-top: 1px solid var(--line); padding-top: 12px; }
+  .voice-name { font-family: "Archivo", sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); }
+  .voice-role { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--mute); margin-top: 3px; }
+
+  /* ---------- Final CTA band ---------- */
+  .cta-band {
+    background: linear-gradient(115deg, #001A30 0%, #003057 50%, #0C4A7A 100%);
+    margin-top: 74px; padding: 64px 24px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-band::after {
+    content: ""; position: absolute; left: -60px; top: -60px;
+    width: 260px; height: 260px; border: 2px solid rgba(179,163,105,0.16); border-radius: 50%;
+  }
+  .cta-band-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  .cta-band h2 { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 27px; color: #fff; margin: 0 0 12px; }
+  .cta-band p { color: #C7D6E0; font-size: 14.5px; line-height: 1.6; margin: 0 0 26px; }
+  .cta-band .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cta-band .btn {
+    display: inline-block; font-size: 14.5px; font-weight: 700; padding: 13px 26px;
+    border-radius: 24px; text-decoration: none; transition: transform 0.12s ease;
+  }
+  .cta-band .btn-gold { background: var(--gold); color: var(--navy); }
+  .cta-band .btn-gold:hover { background: var(--gold-mid); transform: translateY(-1px); }
+  .cta-band .btn-outline { border: 1.5px solid var(--gold); color: #fff; }
+  .cta-band .btn-outline:hover { background: rgba(179,163,105,0.12); }
+
+  /* ---------- Status section tweaks (aims at the three-column band layout) ---------- */
+  .status-band .grid { padding-bottom: 20px; }
+
+  /* lift existing status content so it aligns under the centered heading */
+  .section .grid.side-note, .section .side-card p { max-width: none; }
+
+  .gt-footer { background: var(--navy); color: #C7D3DB; margin-top: 0; }
   .gt-footer-inner { max-width: 1080px; margin: 0 auto; padding: 40px 24px 20px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; }
   @media (max-width: 700px) { .gt-footer-inner { grid-template-columns: 1fr; } }
   .gt-footer h4 { font-family: "Archivo", sans-serif; color: #fff; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; }
