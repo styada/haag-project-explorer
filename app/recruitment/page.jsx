@@ -6,11 +6,13 @@ import {
   getTestimonials,
   getProjectCount,
   getRawProjects,
+  getPeople,
   formatDisplayValue,
   phaseStates,
   currentPhaseLabel,
 } from '../../lib/data';
 import { buildPublicProjects } from '../../lib/projects';
+import StatCounters from './StatCounters';
 
 export const metadata = {
   title: 'Recruitment Status | Human-Augmented Analytics Group',
@@ -37,11 +39,75 @@ export default function RecruitmentPage() {
   const phases = phaseStates(data);
   const updated = formatDisplayValue(data.last_updated) || 'unknown';
 
-  // Recruiting snapshot for the social-proof row: same public-project filter
+  // Recruiting snapshot for the counters row: same public-project filter
   // the Project Explorer shows, so the two pages always agree.
   const projectCount = getProjectCount();
   const publicProjects = buildPublicProjects(getRawProjects());
   const recruitingCount = publicProjects.filter((p) => p.recruiting).length;
+
+  const stats = [
+    {
+      value: 125,
+      label: 'Active researchers',
+      desc: 'across computing, engineering, and the sciences',
+      animate: true,
+    },
+    {
+      value: projectCount,
+      label: 'Research projects',
+      desc: 'real faculty-led work, not toy benchmarks',
+      animate: true,
+    },
+    {
+      value: recruitingCount,
+      label: 'Projects recruiting now',
+      desc: 'open for the current cycle on BuzzMe',
+      animate: true,
+    },
+    {
+      value: 2024,
+      label: 'Founded',
+      desc: 'by Dr. Breanna Shi',
+      animate: false,
+    },
+  ];
+
+  // Editorial claims — every line describes a real, public HAAG project.
+  // Keep this honest: add or swap only from projects/*.yml entries.
+  const runway = [
+    {
+      lead: 'A “CT scan” for mental health',
+      body: 'Deep CNN models that read sleep, stress, and well-being from passive phone-sensing data — turning multivariate time series into learnable images.',
+      href: '/project-explorer',
+    },
+    {
+      lead: 'Generative AI meets paleontology',
+      body: 'Neural shape models exploring more than 2,000 3D scans of fossil and modern lizard vertebrae.',
+      href: '/project-explorer',
+    },
+    {
+      lead: 'Ecology through a warbler’s buzz',
+      body: 'Event-level spectrogram detection to distinguish flight buzzes from calls, and read new behavior out of the sound.',
+      href: '/project-explorer',
+    },
+    {
+      lead: 'Rescuing artifacts from time',
+      body: 'Photogrammetry pipelines that digitize historic artifacts and specimens into public 3D records before they are lost.',
+      href: '/project-explorer',
+    },
+  ];
+
+  // People teaser: monogram cards for a few current researchers.
+  const crew = getPeople().researchers.slice(0, 8).map((p) => {
+    const initials = (p.name || '')
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join('')
+      .toUpperCase();
+    return { ...p, initials: initials || 'HA' };
+  });
 
   return (
     <>
@@ -54,18 +120,15 @@ export default function RecruitmentPage() {
       <Nav current="recruitment" variant="B" />
       <Breadcrumb here="Recruitment Status" />
 
-      {/* ---------- Recruiting hero ---------- */}
+      {/* ---------- Editorial hero (Stanford-style: left set, serif display) ---------- */}
       <div className="recruit-hero">
         <div className="recruit-hero-inner">
           <div className="eyebrow">{data.cycle_name || 'Recruitment'}</div>
-          <h1>
-            Do research that matters.
-            <span className="hero-accent">For credit, with faculty, from day one.</span>
-          </h1>
+          <h1>Research that counts.</h1>
           <p className="sub">
-            HAAG runs a small, selective research program where OMSCS students join real faculty
-            projects — not toy assignments. Every application is read by a person, and you don't
-            need prior research experience to apply: drive and reliability matter more.
+            HAAG is a selective virtual laboratory where OMSCS students join real faculty
+            projects — for course credit, with named mentors, on work that ships. No prior
+            research experience required. Every application is read by a person.
           </p>
           <div className="phase-chip-wrap">
             <span className="phase-chip-dot" aria-hidden="true"></span>
@@ -83,76 +146,102 @@ export default function RecruitmentPage() {
         </div>
       </div>
 
-      {/* ---------- Social proof ---------- */}
-      <div className="stat-wrap">
-        <div className="stat-row">
-          <div className="stat-card">
-            <div className="num">125</div>
-            <div className="lbl">Active Researchers</div>
-            <span className="pill">across departments</span>
-          </div>
-          <div className="stat-card">
-            <div className="num">{projectCount}</div>
-            <div className="lbl">Research Projects</div>
-            <span className="pill">real faculty work</span>
-          </div>
-          <div className="stat-card">
-            <div className="num">{recruitingCount}</div>
-            <div className="lbl">Projects Recruiting Now</div>
-            <span className="pill">open on BuzzMe</span>
-          </div>
-          <div className="stat-card">
-            <div className="num">2024</div>
-            <div className="lbl">Founded</div>
-            <span className="pill">by Dr. Breanna Shi</span>
-          </div>
-        </div>
+      {/* ---------- Count-up stats (Stanford-style hairline row) ---------- */}
+      <div className="count-band">
+        <StatCounters stats={stats} />
       </div>
 
-      {/* ---------- Why join ---------- */}
-      <div className="section" id="why-join">
+      {/* ---------- Research in progress (real projects, punchy claims) ---------- */}
+      <div className="section band-paper" id="runway">
+        <div className="section-head">
+          <div className="eyebrow">Research in progress</div>
+          <h2>What HAAG researchers are working on right now</h2>
+          <p className="head-deck">
+            Every HAAG project begins with a faculty question worth answering. A few of the
+            {projectCount} live in the current portfolio:
+          </p>
+        </div>
+        <ul className="claims">
+          {runway.map((item, i) => (
+            <li key={i}>
+              <a href={item.href} className="claim-link">
+                <strong>{item.lead}</strong>
+                <p>{item.body}</p>
+                <span className="claim-more">Explore →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ---------- Why join (editorial, not SaaS cards) ---------- */}
+      <div className="section band-stone" id="why-join">
         <div className="section-head">
           <div className="eyebrow">Why join HAAG</div>
           <h2>What you actually get as a HAAG researcher</h2>
         </div>
         <div className="benefit-grid">
           <div className="benefit-card">
-            <div className="benefit-icon">★</div>
             <h3>Faculty mentorship, not busywork</h3>
             <p>
-              Work directly with faculty advisors on their own research programs. What you build
-              and ship becomes part of a real project — with your name on the contribution.
+              Work directly with faculty advisors on their own research programs. What you
+              build and ship becomes part of a real project — with your name on the
+              contribution.
             </p>
           </div>
           <div className="benefit-card">
-            <div className="benefit-icon">✦</div>
             <h3>Earn academic credit</h3>
             <p>
               Research for CS 8903 or CS 6999 credit counts toward your degree. One semester
-              makes you a researcher; two semesters usually make you the one training the next.
+              makes you a researcher; two semesters usually make you the one training the
+              next.
             </p>
           </div>
           <div className="benefit-card">
-            <div className="benefit-icon">◈</div>
             <h3>A co-authorship pipeline</h3>
             <p>
-              Strong work here leads to publications, conference submissions, and recommendation
-              letters that actually say something specific about you.
+              Strong work here leads to publications, conference submissions, and
+              recommendation letters that actually say something specific about you.
             </p>
           </div>
           <div className="benefit-card">
-            <div className="benefit-icon">◎</div>
             <h3>A cohort of 125 researchers</h3>
             <p>
-              Admission is selective — but within the cohort you'll find study partners, project
-              teammates, and people who went through exactly what you're about to do.
+              Admission is selective — but within the cohort you'll find study partners,
+              project teammates, and people who went through exactly what you're about to do.
             </p>
           </div>
         </div>
       </div>
 
+      {/* ---------- People teaser (Stanford "Meet our faculty" analog) ---------- */}
+      {crew.length ? (
+        <div className="section" id="people-teaser">
+          <div className="section-head">
+            <div className="eyebrow">The researchers</div>
+            <h2>Meet the community you would join</h2>
+          </div>
+          <div className="crew-grid">
+            {crew.map((person) => (
+              <a
+                className="crew-card"
+                key={person.name + person.profile_url}
+                href={person.profile_url}
+              >
+                <span className="crew-mono" aria-hidden="true">{person.initials}</span>
+                <span className="crew-name">{person.name}</span>
+                <span className="crew-role">{person.role_label || person.role}</span>
+              </a>
+            ))}
+          </div>
+          <div className="crew-more">
+            <a className="cta-link" href="/people">See everyone →</a>
+          </div>
+        </div>
+      ) : null}
+
       {/* ---------- How it works ---------- */}
-      <div className="section" id="how-it-works" style={{ paddingTop: 0 }}>
+      <div className="section band-stone" id="how-it-works" style={{ paddingTop: 64 }}>
         <div className="section-head">
           <div className="eyebrow">How it works</div>
           <h2>Three steps from applicant to researcher</h2>
@@ -165,8 +254,8 @@ export default function RecruitmentPage() {
               <h3>Explore the projects</h3>
               <p>
                 Browse the Project Explorer by category, faculty, and recruiting status. Find
-                work that genuinely matches what you want to learn — applying for a project you
-                care about is the strongest predictor of getting in.
+                work that genuinely matches what you want to learn — applying for a project
+                you care about is the strongest predictor of getting in.
               </p>
               <a className="cta-link" href="/project-explorer">Open the Project Explorer →</a>
             </div>
@@ -196,7 +285,7 @@ export default function RecruitmentPage() {
 
       {/* ---------- Researcher voices ---------- */}
       {testimonials.length ? (
-        <div className="section" id="voices" style={{ paddingTop: 0 }}>
+        <div className="section" id="voices">
           <div className="section-head">
             <div className="eyebrow">Researcher voices</div>
             <h2>What the program looks like from inside</h2>
@@ -216,7 +305,7 @@ export default function RecruitmentPage() {
       ) : null}
 
       {/* ---------- Live status (original page content, restyled) ---------- */}
-      <div className="section" id="status" style={{ paddingTop: 0 }}>
+      <div className="section band-stone" id="status" style={{ paddingTop: 64 }}>
         <div className="section-head">
           <div className="eyebrow">Live status</div>
           <h2>Where the recruitment cycle stands right now</h2>
