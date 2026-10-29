@@ -1,16 +1,18 @@
 PORT ?= 8000
 
-.PHONY: help start serve open check test
+.PHONY: help start serve open check test nextjs
 
 help:
 	@echo "HAAG Project Explorer - Developer Commands"
 	@echo ""
 	@echo "Usage:"
-	@echo "  make start        Start local dev server at http://localhost:$(PORT)"
+	@echo "  make nextjs       Start the Next.js app at http://localhost:$(PORT)"
+	@echo "  make start        Start local static server at http://localhost:$(PORT)"
 	@echo "  make open         Start server and automatically open Project Explorer in browser"
 	@echo "  make check        Validate project files, manifest, and script syntax"
 	@echo ""
 	@echo "Options:"
+	@echo "  PORT=3000 make nextjs  Specify custom port (default: 8000)"
 	@echo "  PORT=3000 make start   Specify custom port (default: 8000)"
 
 start: serve
@@ -48,3 +50,7 @@ test:
 	@node scripts/validate.js
 	@node scripts/test-feature-flags.js
 	@node --check embed-resize.js && echo "✅ JavaScript syntax OK"
+
+nextjs:
+	@echo "Starting Next.js at http://localhost:$(PORT)/project-explorer"
+	npm run dev
