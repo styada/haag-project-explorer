@@ -1,6 +1,10 @@
 # HAAG Project Explorer
 The goal of this project explorer is to provide visibility into the projects under HAAG. This repository holds the metadata for HAAG research projects that will be displayed on the HAAG website.
 
+## Contributing
+
+How to make changes — setup, the common tasks (recruitment phase, adding a project or person, editing page text, changing the nav, adding a page), and the checks to run before a PR — lives in [CONTRIBUTING.md](CONTRIBUTING.md). The codebase rules are in [AGENTS.md](AGENTS.md).
+
 ## Template
 This is the template to be used to structure the metadata. For fields (such as links) that you want to leave blank, please populate with `null`.
 
@@ -37,16 +41,12 @@ See `projects/photogrammetry.yml` as an example.
 
 ## Adding a new project
 
-1. Create a new YAML file under `projects/` using the template above.
-2. Give the project a unique filename, for example `projects/my-new-project.yml`.
-3. Add your new filename to `projects/manifest.json` under the `projects` array.
-4. Set `visibility: public` in the YAML if you want the project to appear in the explorer.
-5. Keep `visibility: private` for work that should remain hidden from the public explorer.
-6. Save and commit both the new YAML file and the updated `projects/manifest.json`.
-
-> The explorer reads `projects/manifest.json` first and then loads each listed YAML file. The manifest is the source of truth for which project files are included.
+See [CONTRIBUTING.md](CONTRIBUTING.md#add-a-project): create the YAML file from the template above, add its filename to `projects/manifest.json`, and run `make check`. The manifest is the source of truth for which project files the explorer loads.
 
 ## Feature flags (required for new features)
+
+> Note: this system belongs to the old static site. The Next.js branch does
+> not carry the `feature-flags.js` registry — see AGENTS.md.
 
 All existing functionality is `CURRENT` by default, represented by the
 `existingSite` baseline in `feature-flags.js`. Existing unmarked UI remains visible.
