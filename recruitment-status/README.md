@@ -1,5 +1,10 @@
 # HAAG Recruitment Status
 
+> On the Next.js branch this page is a React component that reads the same
+> YAML files at build time — there is no `index.html` reading them at page
+> load anymore. For how to update the phase or the FAQs, see
+> **../CONTRIBUTING.md**. The rest of this file describes the original page.
+
 The goal of this page is to give everyone — prospective researchers, faculty, advisors — a
 clear, always-current answer to "where is HAAG right now in the recruitment cycle?"
 This repository holds the single YAML file that drives that status display on the HAAG
