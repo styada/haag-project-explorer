@@ -7,6 +7,10 @@ Approved as a pilot by Riyam on 2026-10-24.
 
 The old hand-written HTML site is untouched on `main`.
 
+For day-to-day changes on this branch (adding projects or people, editing
+page text, updating the recruitment phase), see **CONTRIBUTING.md** — this
+file only covers running the pilot itself.
+
 ## Requirements
 
 - Node.js 20 or newer
