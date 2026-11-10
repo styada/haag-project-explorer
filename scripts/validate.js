@@ -95,10 +95,13 @@ const sideBlockTypes = new Set(["card", "links", "contact"]);
 
 let contentCount = 0;
 if (fs.existsSync(contentDir)) {
-  const contentFiles = fs.readdirSync(contentDir).filter((name) => name.endsWith(".json"));
+  const contentFiles = fs
+    .readdirSync(contentDir)
+    .filter((name) => name.endsWith(".json") && !name.endsWith(".schema.json"));
   const referenced = new Set();
   for (const page of fs.readdirSync(root).filter((name) => name.endsWith(".html"))) {
     const html = fs.readFileSync(path.join(root, page), "utf8");
+    // Note: only double-quoted data-src attributes are matched (every page uses them today).
     for (const match of html.matchAll(/data-src="(content\/[^"]+\.json)"/g)) {
       referenced.add(match[1]);
     }
