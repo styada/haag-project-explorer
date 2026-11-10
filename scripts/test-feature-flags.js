@@ -53,6 +53,10 @@ let pages = 0;
 function checkPages(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.name.startsWith('.')) continue;
+    // Build output is not site source: the Next.js pilot writes exported
+    // pages to out/ and dependencies to node_modules/, and neither carries
+    // the feature-gate setup this check verifies.
+    if (entry.isDirectory() && ['node_modules', 'out'].includes(entry.name)) continue;
     const file = path.join(dir, entry.name);
     if (entry.isDirectory()) { checkPages(file); continue; }
     if (!file.endsWith('.html')) continue;
